@@ -1,0 +1,29 @@
+title: Check WiFi signal strength on systems using SNMP on Ubiquity device
+agents: snmp
+author: Mehdi Abaakouk <sileht@sileht.net>
+license: GPL
+distribution: check_mk
+description:
+ This check measures the signal strength and synchronisation speed 
+ via SNMP on Ubiquity device.
+
+examples:
+ # Set CPU load levels for all SNMP devices to 10.0 and 20.0
+ check_parameters += [
+    ( (-80, -100), [ "snmp" ], ALL_HOSTS, [ "Station*" ] ),
+ ]
+
+perfdata:
+ Three values: signal, rx synchronisation speed, tx synchronisation speed
+
+inventory:
+ If the needed information is available via SNMP one service
+ for the target host will be created.
+
+[parameters]
+warning (float): The lower signal strength accepted
+critical (float): The level for the critical state
+
+[configuration]
+ubnt_signal_default_levels(float, float): The default levels for signal 
+ strength checks. This is preset to {(-86, -100)}.

@@ -120,6 +120,7 @@ def perfometer_check_mk_mem_used(row, check_command, perf_data):
 
 perfometers["check_mk-mem.used"] = perfometer_check_mk_mem_used
 perfometers["check_mk-hr_mem"] = perfometer_check_mk_mem_used
+perfometers["check_mk-ubnt_mem"] = perfometer_check_mk_mem_used
 
 def perfometer_check_mk_mem_win(row, check_command, perf_data):
     # only show mem usage, do omit page file
@@ -154,6 +155,7 @@ def perfometer_check_mk_cpu_loads(row, check_command, perf_data):
 
 perfometers["check_mk-cpu.loads"] = perfometer_check_mk_cpu_loads
 perfometers["check_mk-ucd_cpu_load"] = perfometer_check_mk_cpu_loads
+perfometers["check_mk-ubnt_cpu_load"] = perfometer_check_mk_cpu_loads
 
 def perfometer_check_mk_ntp(row, check_command, perf_data, unit = "ms"):
     offset = float(perf_data[0][1])

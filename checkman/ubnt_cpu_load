@@ -1,0 +1,35 @@
+title: Check CPU load average on systems using SNMP on Ubiquity device
+agents: snmp
+author: Mehdi Abaakouk <sileht@sileht.net>
+license: GPL
+distribution: check_mk
+description:
+ This check measures the CPU load average via SNMP on Ubiquity device.
+
+ The daemon sends a 1, 5 and 15 minute average of the CPU load.
+ The 15 minute value is checked against a warning and a critical level.
+ Since the SNMP MIB does not contain information about the number
+ of CPUs this check assumes only one CPU to be present. Thatfore
+ the warn/crit levels are interpreted as {absolute} values - not
+ as values {per cpu} (like the in agent based load check).
+
+examples:
+ # Set CPU load levels for all SNMP devices to 10.0 and 20.0
+ check_parameters += [
+    ( (10.0, 20.0), [ "snmp" ], ALL_HOSTS, [ "CPU load" ] ),
+ ]
+
+perfdata:
+ Three values: the load average of the last 1, 5 and 15 minutes.
+
+inventory:
+ If the needed information is available via SNMP one service
+ for the target host will be created.
+
+[parameters]
+warning (float): The 15 minute average load that triggers a warning
+critical (float): The level for the critical state
+
+[configuration]
+cpuload_default_levels(float, float): The default levels for all CPU load checks. This is
+  preset to {(5, 10)}.
